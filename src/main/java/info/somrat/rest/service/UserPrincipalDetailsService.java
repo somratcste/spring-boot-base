@@ -1,8 +1,8 @@
-package info.somrat.service;
+package info.somrat.rest.service;
 
-import info.somrat.config.UserPrincipal;
-import info.somrat.entity.User;
-import info.somrat.repository.UserRepository;
+import info.somrat.rest.config.UserPrincipal;
+import info.somrat.rest.models.User;
+import info.somrat.rest.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

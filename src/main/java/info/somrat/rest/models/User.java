@@ -1,4 +1,4 @@
-package info.somrat.entity;
+package info.somrat.rest.models;
 
 import lombok.*;
 import javax.persistence.*;

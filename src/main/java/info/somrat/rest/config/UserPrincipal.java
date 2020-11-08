@@ -1,6 +1,6 @@
-package info.somrat.config;
+package info.somrat.rest.config;
 
-import info.somrat.entity.User;
+import info.somrat.rest.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

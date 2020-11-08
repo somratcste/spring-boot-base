@@ -1,6 +1,6 @@
-package info.somrat.repository;
+package info.somrat.rest.repository;
 
-import info.somrat.entity.User;
+import info.somrat.rest.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

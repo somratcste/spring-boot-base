@@ -10,3 +10,7 @@ spring:
     multipart:
       max-file-size: 15MB
       max-request-size: 15MB
+
+jwt:
+  jwtSecret: SecretKeyToGenJWTs
+  jwtExpirationMs: 864000000 #  10 days
