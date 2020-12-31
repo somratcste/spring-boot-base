@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: ${FRONTEND_DB_URL:jdbc:mariadb://127.0.0.1:3306/spring-boot-base?createDatabaseIfNotExist=true&&serverTimezone=UTC}
-    username: ${FRONTEND_DB_USERNAME:nazmul}
-    password: ${FRONTEND_DB_PASSWORD:1234}
+    username: ${FRONTEND_DB_USERNAME:root}
+    password: ${FRONTEND_DB_PASSWORD:}
   jpa:
     hibernate:
       ddl-auto: update

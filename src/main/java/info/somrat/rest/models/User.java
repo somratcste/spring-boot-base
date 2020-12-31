@@ -2,13 +2,15 @@ package info.somrat.rest.models;
 
 import lombok.*;
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Data
 @AllArgsConstructor @NoArgsConstructor
+@Table(name = "users", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "username"),
+        @UniqueConstraint(columnNames = "email")
+})
 public class User {
 
     @Id
@@ -16,27 +18,28 @@ public class User {
     @Setter(AccessLevel.PROTECTED)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, length = 20)
     private String username;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 55)
+    private String email;
+
+    @Column(nullable = false, length = 120)
     private String password;
 
-    private String roles = "";
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "role_user",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+
     private String permissions = "";
 
-    public User(String username, String password, String roles, String permissions) {
+    public User(String username, String password, Set roles, String permissions) {
         this.username = username;
         this.password = password;
         this.roles = roles;
         this.permissions = permissions;
-    }
-
-    public List<String> getRoleList() {
-        if(this.roles.length() > 0){
-            return Arrays.asList(this.roles.split(","));
-        }
-        return new ArrayList<>();
     }
 
     public List<String> getPermissionList() {

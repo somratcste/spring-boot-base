@@ -9,7 +9,9 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class SignUpRequest {
 
-    @NotBlank(message = "Name is mandatory")
+    @NotBlank
     private String username;
+
+    @NotBlank
     private String password;
 }
