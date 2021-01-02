@@ -1,5 +1,6 @@
 package info.somrat.rest.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import javax.persistence.*;
 import java.util.*;
@@ -16,6 +17,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.PROTECTED)
+    @JsonIgnore
     private Long id;
 
     @Column(nullable = false, length = 20)
@@ -25,6 +27,7 @@ public class User {
     private String email;
 
     @Column(nullable = false, length = 120)
+    @JsonIgnore
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -41,6 +44,7 @@ public class User {
         this.password = password;
     }
 
+    @JsonIgnore
     public List<String> getPermissionList() {
         if(this.permissions.length() > 0){
             return Arrays.asList(this.permissions.split(","));

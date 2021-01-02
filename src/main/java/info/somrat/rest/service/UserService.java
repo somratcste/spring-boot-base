@@ -65,4 +65,13 @@ public class UserService {
         }
         return roles;
     }
+
+    /**
+     * Get user by username
+     * @param username
+     * @return
+     */
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
 }
