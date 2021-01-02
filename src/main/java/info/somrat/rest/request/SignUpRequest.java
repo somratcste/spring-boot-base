@@ -1,6 +1,7 @@
 package info.somrat.rest.request;
 
 import info.somrat.rest.validators.UniqueEmail;
+import info.somrat.rest.validators.UniqueUsername;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ public class SignUpRequest {
 
     @NotBlank
     @Size(min = 3, max = 20)
+    @UniqueUsername
     private String username;
 
     @NotBlank
