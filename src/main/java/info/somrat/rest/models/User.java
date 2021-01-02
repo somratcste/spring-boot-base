@@ -35,11 +35,10 @@ public class User {
 
     private String permissions = "";
 
-    public User(String username, String password, Set roles, String permissions) {
+    public User(String username, String email, String password) {
         this.username = username;
+        this.email = email;
         this.password = password;
-        this.roles = roles;
-        this.permissions = permissions;
     }
 
     public List<String> getPermissionList() {
