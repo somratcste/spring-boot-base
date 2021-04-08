@@ -35,6 +35,7 @@ public class UserService {
     public User save(SignUpRequest request) {
         User user = new User(request.getUsername(), request.getEmail(), passwordEncoder.encode(request.getPassword()));
         user.setRoles(getRoles(request.getRoles()));
+        user.setPermissions(request.getPermissions());
         userRepository.save(user);
         return user;
     }

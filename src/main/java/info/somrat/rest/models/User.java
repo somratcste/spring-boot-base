@@ -44,8 +44,8 @@ public class User {
         this.password = password;
     }
 
-    @JsonIgnore
-    public List<String> getPermissionList() {
+//    @JsonIgnore
+    public List<String> getPermissions() {
         if(this.permissions.length() > 0){
             return Arrays.asList(this.permissions.split(","));
         }

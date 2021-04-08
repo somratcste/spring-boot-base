@@ -35,9 +35,16 @@ public class UserPrincipal implements UserDetails {
     }
 
     public static UserPrincipal build(User user) {
+        // Extract list of roles (ROLE_name)
         List<GrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName().name()))
                 .collect(Collectors.toList());
+
+        // Extract list of permissions (name)
+        user.getPermissions().forEach(p -> {
+            GrantedAuthority authority = new SimpleGrantedAuthority(p);
+            authorities.add(authority);
+        });
 
         return new UserPrincipal(
                 user.getId(),
