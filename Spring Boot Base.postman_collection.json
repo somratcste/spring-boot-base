@@ -1,0 +1,293 @@
+{
+	"info": {
+		"_postman_id": "f1c1794c-3ef8-4219-90eb-44849ccc0f5a",
+		"name": "Spring Boot Base",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Hello",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJicmlkZ2VzdG9uZS1hcGkiLCJzdWIiOiIzYjdiYjgwMC0yZTYyLTExZWItYTI5MS04MzhlMGEwZDkyYjciLCJyb2xlcyI6W3siaWQiOjEsIm5hbWUiOiJTVVBFUl9BRE1JTiJ9XSwidGVuYW50cyI6W10sImlhdCI6MTYwNjIyODUzNywiZXhwIjoxNjM3NzY0NTM3fQ.3UuX7cZut5KdNY8znecZnQe2_HnqLEThcnsfi-dD__w"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"admin@wearhealth.com\"\n}"
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/auth/hello",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"hello"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"nazmul@gmail.com\",\n    \"username\": \"nazmul\",\n\t\"password\": \"123456\",\n    \"roles\": [\"admin\", \"user\"],\n    \"permissions\": \"ACCESS_TEST1,ACCESS_TEST3\"\n}"
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/auth/signup",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"nazmul\",\n\t\"password\": \"123456\"\n}"
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/auth/signin",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuYXptdWwiLCJpYXQiOjE2MTE5OTM0NTUsImV4cCI6MTYxMjg1NzQ1NX0.ndSM6OHUcIF4rdzxGixflvTFMRbGgNK8vCUGaVorFUXdjycLsYjtW8gO-LkKZ3Y-bCzRwBvqY4us4huuR9tW7w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/api/test/all",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"test",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test User",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuYXptdWwiLCJpYXQiOjE2MTc4OTY2MTcsImV4cCI6MTYxODc2MDYxN30.PN_CfH2_vKMMIYskmYCAKi2IMGyD5XKXmow_oE3GE_up2niGrHdxRc7ZSVnbDTot_i2nPZ3vVwikgxCIe1nBLg"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/api/test/user",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"test",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Moderator",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuYXptdWwiLCJpYXQiOjE2MTc4ODkzNDksImV4cCI6MTYxODc1MzM0OX0.MyjAgcCt8dSzpQnw68jQO1YUAJaLOC6tMmF1MN6Q0sSN2ZRnT-w3N1Tfz-dWNpTQoYjPHGMlQjY8w1-ffUX7UQ"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/api/test/moderator",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"test",
+						"moderator"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Admin",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuYXptdWwiLCJpYXQiOjE2MTc4OTcwMDYsImV4cCI6MTYxODc2MTAwNn0.L4Rm-WA6wRuahxz0zjRljpBlXJ9Q465QRkpLANAPdWOl2FMOYO0JDoeP4aEMH_HAY-GNUmQC5XRuSuNFxCNPDw"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/api/test/admin",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"test",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Access Test1",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuYXptdWwiLCJpYXQiOjE2MTIxMDk3MTAsImV4cCI6MTYxMjk3MzcxMH0.WuxMois-j561I5Eq-DG_suZHE4qQyUB7RnSpwe0n2BHqli_F92QKuzH3tnfRZKyVmNXXN9TTYbwgE0FI_yZkeg"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/api/public/test1",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"public",
+						"test1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Access Test2",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuYXptdWwiLCJpYXQiOjE2MTc4OTY2MTcsImV4cCI6MTYxODc2MDYxN30.PN_CfH2_vKMMIYskmYCAKi2IMGyD5XKXmow_oE3GE_up2niGrHdxRc7ZSVnbDTot_i2nPZ3vVwikgxCIe1nBLg"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/api/public/test2",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"public",
+						"test2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Access Test3",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuYXptdWwiLCJpYXQiOjE2MTc4OTY2MTcsImV4cCI6MTYxODc2MDYxN30.PN_CfH2_vKMMIYskmYCAKi2IMGyD5XKXmow_oE3GE_up2niGrHdxRc7ZSVnbDTot_i2nPZ3vVwikgxCIe1nBLg"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/api/public/test3",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"public",
+						"test3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
