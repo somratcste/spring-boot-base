@@ -60,9 +60,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/api/test/**").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/api/public/test1").hasAuthority("ACCESS_TEST1")
                 .antMatchers("/api/public/test2").hasAuthority("ACCESS_TEST2")
                 .anyRequest().authenticated();
+
+        // disable frame options
+        http.headers().frameOptions().disable();
 
         // add jwt filter
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);

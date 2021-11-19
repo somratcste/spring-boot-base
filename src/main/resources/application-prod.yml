@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: ${FRONTEND_DB_URL:jdbc:mariadb://127.0.0.1:3306/spring-boot-base?createDatabaseIfNotExist=true&&serverTimezone=UTC}
+    username: ${FRONTEND_DB_USERNAME:root}
+    password: ${FRONTEND_DB_PASSWORD:}
+  jpa:
+    hibernate:
+      ddl-auto: update
+  servlet:
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 15MB
+
+jwt:
+  jwtSecret: SecretKeyToGenJWTs
+  jwtExpirationMs: 864000000 #  10 days
