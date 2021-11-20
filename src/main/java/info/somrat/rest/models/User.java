@@ -44,6 +44,10 @@ public class User {
         this.password = password;
     }
 
+    // relation
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
+
 //    @JsonIgnore
     public List<String> getPermissions() {
         if(this.permissions.length() > 0){

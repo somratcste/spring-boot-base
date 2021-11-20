@@ -1,6 +1,9 @@
 package info.somrat.rest.utils;
 
-public final class CommonUtils {
+public class Helper {
+
+    private Helper() {}
+
     /**
      * Check the string is empty or not
      * @param string
