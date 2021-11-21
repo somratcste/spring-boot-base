@@ -46,6 +46,16 @@ public class PostService implements FieldValueExists {
         }
     }
 
+    public boolean delete(long id) {
+        Optional<Post> _post = postRepository.findById(id);
+        if (_post.isPresent()) {
+            postRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     @Override
     public boolean fieldValueExists(Object value, String fieldName) throws UnsupportedOperationException {
         if (!fieldName.equals("title")) {
