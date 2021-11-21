@@ -19,7 +19,7 @@ public class ExceptionErrorHandler {
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     ResponseEntity<ApiResponse> entityNotFoundException(EntityNotFoundException exception) {
         return new ResponseEntity<ApiResponse>(new ApiResponse(false, exception.getMessage()), HttpStatus.BAD_REQUEST);
     }

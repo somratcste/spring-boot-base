@@ -4,7 +4,8 @@ import info.somrat.rest.models.Post;
 import info.somrat.rest.models.User;
 import info.somrat.rest.repository.PostRepository;
 import info.somrat.rest.repository.UserRepository;
-import info.somrat.rest.request.PostRequest;
+import info.somrat.rest.request.PostCreateRequest;
+import info.somrat.rest.request.PostUpdateRequest;
 import info.somrat.rest.validators.FieldValueExists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class PostService implements FieldValueExists {
     @Autowired
     private UserRepository userRepository;
 
-    public Post create(PostRequest post) {
+    public Post create(PostCreateRequest post) {
         Post _post = new Post();
         _post.setTitle(post.getTitle());
         _post.setDescription(post.getDescription());
@@ -31,6 +32,18 @@ public class PostService implements FieldValueExists {
             throw new EntityNotFoundException("User not found!");
         }
         return postRepository.save(_post);
+    }
+
+    public Post update(long id, PostUpdateRequest post) {
+        Optional<Post> postData = postRepository.findById(id);
+        if (postData.isPresent()) {
+            Post _post = postData.get();
+            _post.setTitle(post.getTitle());
+            _post.setDescription(post.getDescription());
+            return postRepository.save(_post);
+        } else {
+            throw new EntityNotFoundException("Post not found!");
+        }
     }
 
     @Override
