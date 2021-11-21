@@ -56,6 +56,24 @@ public class PostService implements FieldValueExists {
         }
     }
 
+    public Post getById(long id) {
+        Optional<Post> _post = postRepository.findById(id);
+        if (_post.isPresent()) {
+            return _post.get();
+        } else {
+            throw new EntityNotFoundException("Post not found!");
+        }
+    }
+
+    public boolean deleteAll() {
+        try {
+            postRepository.deleteAll();
+            return true;
+        } catch (Exception exception) {
+            return false;
+        }
+    }
+
     @Override
     public boolean fieldValueExists(Object value, String fieldName) throws UnsupportedOperationException {
         if (!fieldName.equals("title")) {

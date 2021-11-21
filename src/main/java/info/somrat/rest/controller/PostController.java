@@ -42,4 +42,20 @@ public class PostController {
         }
     }
 
+    @GetMapping("/posts/{id}")
+    public ResponseEntity<ObjectResponse> getById(@PathVariable("id") long id) {
+        Post _post = postService.getById(id);
+        return ResponseEntity.ok(new ObjectResponse(true, "", _post));
+    }
+
+    @DeleteMapping("/posts")
+    public ResponseEntity<ApiResponse> deleteAll() {
+        boolean deleteAll = postService.deleteAll();
+        if (deleteAll) {
+            return ResponseEntity.ok(new ApiResponse(true, "Deleted All Posts!"));
+        } else {
+            return new ResponseEntity(new ApiResponse(false, "Something goes wrong!"), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
