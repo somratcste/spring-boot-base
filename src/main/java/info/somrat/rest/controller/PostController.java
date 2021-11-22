@@ -5,12 +5,16 @@ import info.somrat.rest.request.PostCreateRequest;
 import info.somrat.rest.request.PostUpdateRequest;
 import info.somrat.rest.response.ApiResponse;
 import info.somrat.rest.response.ObjectResponse;
+import info.somrat.rest.response.PageResponse;
 import info.somrat.rest.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
+import java.util.Arrays;
 
 @RestController
 @RequestMapping("/api")
@@ -56,6 +60,16 @@ public class PostController {
         } else {
             return new ResponseEntity(new ApiResponse(false, "Something goes wrong!"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/posts")
+    public ResponseEntity<PageResponse> getAll(@RequestParam(defaultValue = "0") Integer pageNo,
+                                               @RequestParam(defaultValue = "10") Integer pageSize,
+                                               @RequestParam(defaultValue = "id") String sortBy,
+                                               @RequestParam(required = false) String title) {
+        Page<Post> postPage = postService.getAll(pageNo, pageSize, sortBy, title);
+        return ResponseEntity.ok(new PageResponse(true, "", postPage.getTotalElements(), postPage.getTotalPages(),
+                postPage.getNumber(), Arrays.asList(postPage.getContent().toArray())));
     }
 
 }

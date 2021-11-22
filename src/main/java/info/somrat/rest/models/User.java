@@ -46,6 +46,7 @@ public class User {
 
     // relation
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Post> posts;
 
 //    @JsonIgnore

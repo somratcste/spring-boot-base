@@ -6,8 +6,13 @@ import info.somrat.rest.repository.PostRepository;
 import info.somrat.rest.repository.UserRepository;
 import info.somrat.rest.request.PostCreateRequest;
 import info.somrat.rest.request.PostUpdateRequest;
+import info.somrat.rest.utils.Helper;
 import info.somrat.rest.validators.FieldValueExists;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
@@ -72,6 +77,17 @@ public class PostService implements FieldValueExists {
         } catch (Exception exception) {
             return false;
         }
+    }
+
+    public Page<Post> getAll(int pageNo, int pageSize, String sortBy, String title) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).ascending());
+        Page<Post> postPage;
+        if (!Helper.isNullOrEmpty(title)) {
+            postPage = postRepository.findByTitleContaining(title, pageable);
+        } else {
+            postPage = postRepository.findAll(pageable);
+        }
+        return postPage;
     }
 
     @Override
