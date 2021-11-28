@@ -39,8 +39,8 @@ public class PostService implements FieldValueExists {
         return postRepository.save(_post);
     }
 
-    public Post update(long id, PostUpdateRequest post) {
-        Optional<Post> postData = postRepository.findById(id);
+    public Post update(int id, PostUpdateRequest post) {
+        Optional<Post> postData = postRepository.findById((long) id);
         if (postData.isPresent()) {
             Post _post = postData.get();
             _post.setTitle(post.getTitle());
@@ -87,6 +87,12 @@ public class PostService implements FieldValueExists {
         } else {
             postPage = postRepository.findAll(pageable);
         }
+        return postPage;
+    }
+
+    public Page getAllPostsByUser(int pageNo, int pageSize, long userId) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<Post> postPage = postRepository.findByUserIdOrderByIdDesc(userId, pageable);
         return postPage;
     }
 

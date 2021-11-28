@@ -11,4 +11,5 @@ public interface PostRepository extends PagingAndSortingRepository<Post, Long> {
 
     Post findByTitle(String title);
     Page<Post> findByTitleContaining(String title, Pageable pageable);
+    Page<Post> findByUserIdOrderByIdDesc(long id, Pageable pageable);
 }

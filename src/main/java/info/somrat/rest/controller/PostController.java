@@ -12,31 +12,30 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.Arrays;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/posts")
 @CrossOrigin(origins = "*")
 public class PostController {
 
     @Autowired
     private PostService postService;
 
-    @PostMapping("/posts")
+    @PostMapping
     public ResponseEntity<ObjectResponse> create(@Valid @RequestBody PostCreateRequest post) {
         Post _post = postService.create(post);
         return ResponseEntity.ok(new ObjectResponse(true, "Post Created successfully!", _post));
     }
 
-    @PutMapping("/posts/{id}")
-    public ResponseEntity<ObjectResponse> update(@PathVariable("id") long id,  @Valid @RequestBody PostUpdateRequest post) {
+    @PutMapping("/{id}")
+    public ResponseEntity<ObjectResponse> update(@PathVariable("id") int id,  @Valid @RequestBody PostUpdateRequest post) {
         Post _post = postService.update(id, post);
         return ResponseEntity.ok(new ObjectResponse(true, "Post Updated Successfully!", _post));
     }
 
-    @DeleteMapping("/posts/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse> delete(@PathVariable("id") long id) {
         boolean deletePost = postService.delete(id);
         if (deletePost) {
@@ -46,13 +45,13 @@ public class PostController {
         }
     }
 
-    @GetMapping("/posts/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ObjectResponse> getById(@PathVariable("id") long id) {
         Post _post = postService.getById(id);
         return ResponseEntity.ok(new ObjectResponse(true, "", _post));
     }
 
-    @DeleteMapping("/posts")
+    @DeleteMapping
     public ResponseEntity<ApiResponse> deleteAll() {
         boolean deleteAll = postService.deleteAll();
         if (deleteAll) {
@@ -62,7 +61,7 @@ public class PostController {
         }
     }
 
-    @GetMapping("/posts")
+    @GetMapping
     public ResponseEntity<PageResponse> getAll(@RequestParam(defaultValue = "0") Integer pageNo,
                                                @RequestParam(defaultValue = "10") Integer pageSize,
                                                @RequestParam(defaultValue = "id") String sortBy,

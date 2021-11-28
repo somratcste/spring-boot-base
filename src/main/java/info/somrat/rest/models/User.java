@@ -1,6 +1,7 @@
 package info.somrat.rest.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import javax.persistence.*;
 import java.util.*;
@@ -30,12 +31,14 @@ public class User {
     @JsonIgnore
     private String password;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "role_user",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String permissions = "";
 
     public User(String username, String email, String password) {
@@ -44,12 +47,6 @@ public class User {
         this.password = password;
     }
 
-    // relation
-    @OneToMany(mappedBy = "user")
-    @JsonIgnore
-    private List<Post> posts;
-
-//    @JsonIgnore
     public List<String> getPermissions() {
         if(this.permissions.length() > 0){
             return Arrays.asList(this.permissions.split(","));

@@ -3,7 +3,6 @@ package info.somrat.rest.models;
 import info.somrat.rest.enums.ERole;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 
 @Data
@@ -13,7 +12,7 @@ import javax.persistence.*;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 20)

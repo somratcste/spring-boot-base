@@ -1,7 +1,7 @@
 package info.somrat.rest.controller;
 
+import info.somrat.rest.config.UserPrincipal;
 import info.somrat.rest.jwt.JwtTokenProvider;
-import info.somrat.rest.models.User;
 import info.somrat.rest.request.LoginRequest;
 import info.somrat.rest.request.SignUpRequest;
 import info.somrat.rest.response.ApiResponse;
@@ -56,8 +56,8 @@ public class AuthController {
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwtToken = jwtTokenProvider.generateJwtToken(authentication);
-        User user = userService.findByUsername(request.getUsername());
-        return ResponseEntity.ok(new JwtResponse(jwtToken, user));
+        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+        return ResponseEntity.ok(new JwtResponse(jwtToken, userService.convertUserPrincipleToUserDTO(userPrincipal)));
     }
 
     @GetMapping("/hello")

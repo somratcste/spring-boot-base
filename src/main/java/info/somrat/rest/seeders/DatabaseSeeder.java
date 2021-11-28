@@ -27,12 +27,13 @@ public class DatabaseSeeder {
     }
 
     private void seedRolesTable() {
-        roleRepository.deleteAll();
-        logger.info("Start role seeding ---------- " + roleRepository.count());
-        Role admin = new Role(ERole.ROLE_ADMIN);
-        Role moderator = new Role(ERole.ROLE_MODERATOR);
-        Role user = new Role(ERole.ROLE_USER);
-        roleRepository.saveAll(Arrays.asList(admin, moderator, user));
-        logger.info("End role seeding ---------- " + roleRepository.count());
+        if (roleRepository.findAll().size() == 0) {
+            logger.info("Start role seeding ---------- " + roleRepository.count());
+            Role admin = new Role(ERole.ROLE_ADMIN);
+            Role moderator = new Role(ERole.ROLE_MODERATOR);
+            Role user = new Role(ERole.ROLE_USER);
+            roleRepository.saveAll(Arrays.asList(admin, moderator, user));
+            logger.info("End role seeding ---------- " + roleRepository.count());
+        }
     }
 }

@@ -1,18 +1,26 @@
 package info.somrat.rest.service;
 
+import info.somrat.rest.config.UserPrincipal;
+import info.somrat.rest.dto.UserDTO;
 import info.somrat.rest.enums.ERole;
+import info.somrat.rest.models.Post;
 import info.somrat.rest.models.Role;
 import info.somrat.rest.models.User;
 import info.somrat.rest.repository.RoleRepository;
 import info.somrat.rest.repository.UserRepository;
 import info.somrat.rest.request.SignUpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Tuple;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -74,5 +82,37 @@ public class UserService {
      */
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    /**
+     * Combine user and roles to UserDTO
+     * @param username
+     * @return
+     */
+    public UserDTO getByUsername (String username) {
+        Tuple userTuple = userRepository.getUserByUsername(username);
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUsername(userTuple.get(0, String.class));
+        userDTO.setEmail(userTuple.get(1, String.class));
+        userDTO.setPermissions(Arrays.asList(userTuple.get(2, String.class)));
+        userDTO.setRoles(userRepository.getRoleByUsername(username));
+        return userDTO;
+    }
+
+    /**
+     * Convert UserPrinciple To UserDTO Object
+     * @param userPrincipal
+     * @return
+     */
+    public UserDTO convertUserPrincipleToUserDTO(UserPrincipal userPrincipal) {
+        List<String> roles = userPrincipal.getAuthorities().stream()
+                .filter(role -> role.getAuthority().startsWith("ROLE_"))
+                .map(role -> role.getAuthority())
+                .collect(Collectors.toList());
+        List<String> permissions = userPrincipal.getAuthorities().stream()
+                .filter(role -> !role.getAuthority().startsWith("ROLE_"))
+                .map(role -> role.getAuthority())
+                .collect(Collectors.toList());
+        return new UserDTO(userPrincipal.getUsername(), userPrincipal.getEmail(), permissions, roles);
     }
 }
