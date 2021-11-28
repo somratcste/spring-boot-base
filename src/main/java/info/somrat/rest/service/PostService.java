@@ -14,6 +14,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
@@ -26,6 +28,7 @@ public class PostService implements FieldValueExists {
     @Autowired
     private UserRepository userRepository;
 
+    @Transactional
     public Post create(PostCreateRequest post) {
         Post _post = new Post();
         _post.setTitle(post.getTitle());

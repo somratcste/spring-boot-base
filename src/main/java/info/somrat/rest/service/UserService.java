@@ -3,18 +3,15 @@ package info.somrat.rest.service;
 import info.somrat.rest.config.UserPrincipal;
 import info.somrat.rest.dto.UserDTO;
 import info.somrat.rest.enums.ERole;
-import info.somrat.rest.models.Post;
 import info.somrat.rest.models.Role;
 import info.somrat.rest.models.User;
 import info.somrat.rest.repository.RoleRepository;
 import info.somrat.rest.repository.UserRepository;
 import info.somrat.rest.request.SignUpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.Tuple;
 import java.util.Arrays;
 import java.util.HashSet;
