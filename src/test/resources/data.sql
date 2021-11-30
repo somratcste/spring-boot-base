@@ -5,7 +5,7 @@ insert into roles(id, name) values(3,'ROLE_ADMIN');
 
 -- insert mock users password (123456)
 insert into users(id, email, password, permissions, username) values (1, 'hossain@gmail.com',
-'$2a$10$dIoKICLPNQEAgMAfB/ULuev4IjHZ8Zp5cGd1v6uG4Ftfuw3Qnj2u2', 'ACCESS_TEST1,ACCESS_TEST3', 'hossain');
+'$2a$10$dIoKICLPNQEAgMAfB/ULuev4IjHZ8Zp5cGd1v6uG4Ftfuw3Qnj2u2', 'ACCESS_TEST1,ACCESS_TEST2,ACCESS_TEST3', 'hossain');
 
 -- set roles for user
 insert into role_user(user_id, role_id) values (1, 1);

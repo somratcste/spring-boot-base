@@ -35,4 +35,34 @@ public class TestControllerIT {
         ResponseEntity<String> response = restTemplate.exchange(BASE_URL + "/all", HttpMethod.GET, request, String.class);
         assertEquals("Public Content.", response.getBody());
     }
+
+    @Test
+    public void userAccessSuccess() {
+        getUserToken();
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + token);
+        HttpEntity<String> request = new HttpEntity<>(headers);
+        ResponseEntity<String> response = restTemplate.exchange(BASE_URL + "/user", HttpMethod.GET, request, String.class);
+        assertEquals(HttpStatus.OK.value(), response.getStatusCodeValue());
+    }
+
+    @Test
+    public void ModeratorAccessSuccess() {
+        getUserToken();
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + token);
+        HttpEntity<String> request = new HttpEntity<>(headers);
+        ResponseEntity<String> response = restTemplate.exchange(BASE_URL + "/moderator", HttpMethod.GET, request, String.class);
+        assertEquals(HttpStatus.OK.value(), response.getStatusCodeValue());
+    }
+
+    @Test
+    public void adminAccessSuccess() {
+        getUserToken();
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + token);
+        HttpEntity<String> request = new HttpEntity<>(headers);
+        ResponseEntity<String> response = restTemplate.exchange(BASE_URL + "/admin", HttpMethod.GET, request, String.class);
+        assertEquals(HttpStatus.OK.value(), response.getStatusCodeValue());
+    }
 }
