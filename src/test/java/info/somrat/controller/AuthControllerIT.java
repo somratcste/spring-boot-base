@@ -29,7 +29,7 @@ public class AuthControllerIT {
     @Test
     @Order(1)
     public void signUpSuccess() {
-        SignUpRequest user = new SignUpRequest("hossain", "hossain@gmail.com", Set.of("user"),
+        SignUpRequest user = new SignUpRequest("nazmul", "nazmul@gmail.com", Set.of("user"),
                 "123456", "ACCESS_TEST");
 
         HttpEntity<SignUpRequest> request = new HttpEntity<>(user);
