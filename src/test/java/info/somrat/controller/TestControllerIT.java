@@ -10,6 +10,7 @@ import org.springframework.http.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TestControllerIT {
 
     @Autowired
@@ -17,51 +18,39 @@ public class TestControllerIT {
 
     private final String BASE_URL = "/api/test";
     String token;
+    HttpEntity<String> request;
 
-    public void getUserToken() {
+    @BeforeAll
+    public void getUserRequest() {
         LoginRequest user = new LoginRequest("hossain", "123456");
         HttpEntity<LoginRequest> loginRequest = new HttpEntity<>(user);
         ResponseEntity<JwtResponse> result = restTemplate.postForEntity("/api/auth/signin", loginRequest, JwtResponse.class);
         token =  result.getBody().getToken();
-        assertEquals(HttpStatus.OK.value(), result.getStatusCodeValue());
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + token);
+        request = new HttpEntity<>(headers);
     }
 
     @Test
     public void allSuccess() {
-        getUserToken();
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + token);
-        HttpEntity<String> request = new HttpEntity<>(headers);
         ResponseEntity<String> response = restTemplate.exchange(BASE_URL + "/all", HttpMethod.GET, request, String.class);
         assertEquals("Public Content.", response.getBody());
     }
 
     @Test
     public void userAccessSuccess() {
-        getUserToken();
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + token);
-        HttpEntity<String> request = new HttpEntity<>(headers);
         ResponseEntity<String> response = restTemplate.exchange(BASE_URL + "/user", HttpMethod.GET, request, String.class);
         assertEquals(HttpStatus.OK.value(), response.getStatusCodeValue());
     }
 
     @Test
     public void ModeratorAccessSuccess() {
-        getUserToken();
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + token);
-        HttpEntity<String> request = new HttpEntity<>(headers);
         ResponseEntity<String> response = restTemplate.exchange(BASE_URL + "/moderator", HttpMethod.GET, request, String.class);
         assertEquals(HttpStatus.OK.value(), response.getStatusCodeValue());
     }
 
     @Test
     public void adminAccessSuccess() {
-        getUserToken();
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + token);
-        HttpEntity<String> request = new HttpEntity<>(headers);
         ResponseEntity<String> response = restTemplate.exchange(BASE_URL + "/admin", HttpMethod.GET, request, String.class);
         assertEquals(HttpStatus.OK.value(), response.getStatusCodeValue());
     }
