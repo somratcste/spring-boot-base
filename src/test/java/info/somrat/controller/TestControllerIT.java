@@ -17,7 +17,6 @@ public class TestControllerIT {
     private TestRestTemplate restTemplate;
 
     private final String BASE_URL = "/api/test";
-    String token;
     HttpEntity<String> request;
 
     @BeforeAll
@@ -25,7 +24,7 @@ public class TestControllerIT {
         LoginRequest user = new LoginRequest("hossain", "123456");
         HttpEntity<LoginRequest> loginRequest = new HttpEntity<>(user);
         ResponseEntity<JwtResponse> result = restTemplate.postForEntity("/api/auth/signin", loginRequest, JwtResponse.class);
-        token =  result.getBody().getToken();
+        String token =  result.getBody().getToken();
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + token);
         request = new HttpEntity<>(headers);
