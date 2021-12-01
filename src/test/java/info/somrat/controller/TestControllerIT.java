@@ -26,7 +26,7 @@ public class TestControllerIT {
         ResponseEntity<JwtResponse> result = restTemplate.postForEntity("/api/auth/signin", loginRequest, JwtResponse.class);
         String token =  result.getBody().getToken();
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + token);
+        headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + token);
         request = new HttpEntity<>(headers);
     }
 

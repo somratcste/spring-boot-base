@@ -2,10 +2,12 @@ package info.somrat.rest.request;
 
 import info.somrat.rest.service.PostService;
 import info.somrat.rest.validators.Unique;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 
-@Data
+@Data @NoArgsConstructor @AllArgsConstructor
 public class PostUpdateRequest {
 
     @NotBlank
