@@ -41,10 +41,9 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String permissions = "";
 
-    public User(String username, String email, String password) {
+    public User(String username, String email) {
         this.username = username;
         this.email = email;
-        this.password = password;
     }
 
     public List<String> getPermissions() {

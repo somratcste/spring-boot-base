@@ -38,7 +38,8 @@ public class UserService {
      */
     @Transactional
     public User save(SignUpRequest request) {
-        User user = new User(request.getUsername(), request.getEmail(), passwordEncoder.encode(request.getPassword()));
+        User user = new User(request.getUsername(), request.getEmail());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRoles(getRoles(request.getRoles()));
         user.setPermissions(request.getPermissions());
         userRepository.save(user);

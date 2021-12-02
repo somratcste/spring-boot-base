@@ -2,6 +2,7 @@ package info.somrat.rest.controller;
 
 import info.somrat.rest.models.User;
 import info.somrat.rest.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,11 +12,9 @@ import java.util.List;
 @RestController
 @RequestMapping("api/public")
 public class PublicRestApiController {
-    private UserRepository userRepository;
 
-    public PublicRestApiController(UserRepository userRepository){
-        this.userRepository = userRepository;
-    }
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("test1")
     public String test1(){

@@ -1,4 +1,4 @@
-package info.somrat.controller;
+package info.somrat.integration;
 
 import info.somrat.rest.request.LoginRequest;
 import info.somrat.rest.response.JwtResponse;
