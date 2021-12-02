@@ -6,6 +6,7 @@ import info.somrat.rest.jwt.JwtTokenProvider;
 import info.somrat.rest.models.User;
 import info.somrat.rest.repository.UserRepository;
 import info.somrat.rest.request.SignUpRequest;
+import info.somrat.rest.response.ApiResponse;
 import info.somrat.rest.service.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -61,7 +62,7 @@ public class AuthControllerTest {
 
         MvcResult result = mockMvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(content().json("{\"success\":true,\"message\":\"User registered successfully!\"}"))
+                .andExpect(content().json(objectMapper.writeValueAsString(new ApiResponse(true, "User registered successfully!"))))
                 .andReturn();
 
         verify(userService, times(1)).save(refEq(user));
