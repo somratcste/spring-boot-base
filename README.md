@@ -1,2 +1,29 @@
-# spring-boot-base
-Spring Boot Base Application 
+# Spring Boot REST Application
+
+- Input Validation
+- Spring Security 
+- Json Web Token (JWT)
+- ACL (Access Control List)
+- Exception Handling 
+- Generic REST Response 
+- Custom Validator 
+- Custom Generic Validator 
+- CORS (Cross-origin resource sharing) 
+- Lombok
+- Spring Data JPA
+- Native Query 
+- 1-1, 1-N, N-N Relation 
+- DTO (Data Transfer Object) Layer
+- Database Transaction 
+- Database Seeder 
+- Database
+    - In Memory Database for Testing (H2)
+    - Relational Database for Production (MySql)
+- Testing 
+    - Unit Test (Junit5, Mockito)
+        - Web Layer Test (Controller)
+        - Service Layer Test (Business Logic)
+        - Repository Test (Spring Data JPA)
+    - Integration Test (MockMvc, MockBean, TestRestTemplate)
+        - End-to-End Test 
+- Testing Coverage (more than 90 %)
