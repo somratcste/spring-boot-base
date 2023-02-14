@@ -8,6 +8,7 @@ import info.somrat.rest.request.PostCreateRequest;
 import info.somrat.rest.request.PostUpdateRequest;
 import info.somrat.rest.response.ApiResponse;
 import info.somrat.rest.service.PostService;
+import info.somrat.rest.service.PostServiceImpl;
 import org.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,10 @@ public class PostControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private PostService postService;
+    private PostServiceImpl postService;
+
+//    @MockBean
+//    private PostServiceImpl postServiceImpl;
 
     @Autowired
     private ObjectMapper objectMapper;

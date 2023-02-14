@@ -7,6 +7,7 @@ import info.somrat.rest.repository.UserRepository;
 import info.somrat.rest.request.PostCreateRequest;
 import info.somrat.rest.request.PostUpdateRequest;
 import info.somrat.rest.service.PostService;
+import info.somrat.rest.service.PostServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PostServiceTest {
 
     @InjectMocks
-    private PostService postService;
+    private PostServiceImpl postService;
 
     @Mock
     private PostRepository postRepository;
